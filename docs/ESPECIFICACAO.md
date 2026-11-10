@@ -1,6 +1,6 @@
 # Especificação do E OS
 
-Versão do documento: 0.2 · Atualizado em 09/11/2026
+Versão do documento: 0.2 · Atualizado em 10/11/2026
 
 ## 1. Visão
 
@@ -31,7 +31,7 @@ Para quem usa, a origem não importa: todo app aparece no mesmo menu, no mesmo d
 | **Desktop** | Tudo incluso: Linux, Android e Windows | 2 GB (4 GB para usar Android e Windows juntos) |
 | **Mobile** | Celulares e tablets, interface de toque | depende do aparelho |
 
-A primeira entrega foi o **E OS 0.1 Core** (modo texto). A versão atual, **E OS 0.2**, já traz a interface gráfica Fusão e é a base da edição Lite.
+A primeira entrega foi o **E OS 0.1 Core** (modo texto). A versão atual, **E OS 0.2**, já traz a interface gráfica Fusão e um instalador gráfico com a cara do E OS, e é a base da edição Lite.
 
 ## 4. Decisões técnicas
 
@@ -43,7 +43,7 @@ A primeira entrega foi o **E OS 0.1 Core** (modo texto). A versão atual, **E OS
 | Inicialização | systemd | Decidido |
 | Memória | zram (swap comprimida na própria RAM) e ajustes do kernel para pouca memória | Decidido |
 | Rede | NetworkManager (Wi-Fi e cabo, com ícone na barra) e systemd-resolved para DNS | Decidido (0.2) |
-| Instalador | Debian Installer no modo live (gráfico e texto), com padrões do E OS; instalador gráfico próprio (Calamares) na Fase 3 | Decidido |
+| Instalador | Calamares com a cara do E OS, aberto pelo dock da sessão live (o recomendado); Debian Installer no modo live (gráfico e texto) no menu de boot, como alternativa. Os dois com os padrões do E OS e sem precisar de internet. No UEFI, o instalador gráfico grava o shim e o GRUB assinados do Debian, para o sistema ligar com o Secure Boot ativo | Decidido (0.2) |
 | Particionamento | Esquema próprio: partição EFI (no UEFI), raiz a partir de 4 GB e nenhuma partição de swap, porque o E OS usa zram | Decidido (0.2) |
 | Gráficos | Wayland com o compositor labwc; desenho por software quando não há aceleração de vídeo | Decidido (0.2) |
 | Interface | Fusão: Waybar (barra e dock), SwayNC (painel rápido e notificações) e Fuzzel (busca), com tema, ícones e scripts do E OS. Peças próprias em Qt/QML entram onde fizerem diferença | Decidido (0.2) |
@@ -87,6 +87,7 @@ Medições de 09/11/2026, em emulação (sem KVM), sessão live com 1 GB:
 - **E OS 0.2 (interface Fusão aberta):** sobram uns 630 MB disponíveis. A interface toda custa uns 85 MB a mais que o modo texto. Os maiores consumidores são a barra/dock (Waybar, uns 57 MB), o painel rápido (SwayNC, uns 41 MB), o compositor (labwc, uns 38 MB) e o ícone de rede (nm-applet, uns 31 MB). Boot de 42 a 44 s até os serviços subirem.
 
 - **E OS 0.2 instalado no disco** (teste automático, BIOS e UEFI, antes de abrir a interface): boot de 18 a 19 s, uns 125 MB ocupados e uns 725 MB disponíveis. A instalação completa levou 9 minutos.
+- **E OS 0.2 instalado pelo instalador gráfico** (Calamares, teste manual de 10/11/2026 no QEMU com 1 GB, em BIOS, UEFI e UEFI com Secure Boot): a instalação levou uns 7 minutos. No sistema instalado, com a interface e um terminal abertos, ficaram de 183 a 193 MB ocupados e de 589 a 636 MB disponíveis, sem nenhum serviço com falha.
 
 Em hardware real, sem emulação, o boot deve ser bem mais rápido.
 
@@ -163,6 +164,7 @@ Suportar "todos os processadores já fabricados" não é possível: cada arquite
 - [x] Arquivos, terminal, editor de texto e navegador
 - [x] Rede com Wi-Fi (NetworkManager) e som (PipeWire)
 - [x] Logo (tesserato), papel de parede e tema próprios
+- [x] Instalador gráfico com a cara do E OS (Calamares), aberto pelo dock
 - [ ] Login gráfico no sistema instalado
 - [ ] E Settings: central de configurações
 - [ ] Flatpak
@@ -172,7 +174,7 @@ Suportar "todos os processadores já fabricados" não é possível: cada arquite
 ### Fase 3: otimização e edição Lite (0.3)
 
 - Cortar serviços, medir boot e memória
-- Instalador gráfico com a cara do E OS (Calamares)
+- Teste automático do instalador gráfico
 - Testes em máquinas antigas com 1 GB
 - Edição Lite
 
@@ -206,5 +208,5 @@ Este documento parte do [plano inicial feito no ChatGPT](https://chatgpt.com/sha
 - processadores realistas: x86-64 e ARM64 primeiro, 32 bits fora;
 - compositor leve em vez do KWin, porque a memória depende mais da interface que da distribuição;
 - apps Android e Windows como parte do sistema, no modelo do ChromeOS;
-- instalador antecipado da Fase 6 para a Fase 1 (Debian Installer), com um instalador próprio (Calamares) na Fase 3;
+- instalador antecipado da Fase 6 para a Fase 1 (Debian Installer), e o instalador gráfico com a cara do E OS (Calamares) já na 0.2;
 - interface Fusão montada com peças prontas e leves (Waybar, SwayNC, Fuzzel) em vez de um shell escrito do zero em Qt/QML, para chegar mais rápido a um sistema usável; peças próprias entram onde fizerem diferença.

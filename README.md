@@ -2,7 +2,7 @@
 
 Sistema operacional leve baseado em Linux, no modelo do ChromeOS: simples, rápido e feito para máquinas com pouca memória. A meta é rodar apps Linux, Android e Windows no mesmo sistema.
 
-> **Estado:** E OS 0.2, com a interface gráfica **Fusão**. A ISO para PCs x86-64 dá para experimentar sem instalar ou instalar no disco. Veja o [roteiro](docs/ESPECIFICACAO.md#8-roteiro).
+> **Estado:** E OS 0.2, com a interface gráfica **Fusão** e um instalador gráfico com a cara do E OS. A ISO para PCs x86-64 dá para experimentar sem instalar ou instalar no disco. Veja o [roteiro](docs/ESPECIFICACAO.md#8-roteiro).
 
 ![Área de trabalho do E OS 0.2](docs/img/interface-area-de-trabalho.png)
 
@@ -65,7 +65,7 @@ No Linux:
 ./eos.sh build
 ```
 
-A ISO sai em `out/eos-0.2-amd64.hybrid.iso` (uns 920 MB). O primeiro build leva uns 20 minutos. Os seguintes são mais rápidos, porque reaproveitam os pacotes já baixados.
+A ISO sai em `out/eos-0.2-amd64.hybrid.iso` (cerca de 1 GB). O primeiro build leva uns 20 minutos. Os seguintes são mais rápidos, porque reaproveitam os pacotes já baixados.
 
 ## Experimentar ou instalar
 
@@ -73,12 +73,38 @@ Grave a ISO num pendrive com o [Rufus](https://rufus.ie) ou o [Ventoy](https://w
 
 | Opção | O que faz |
 |---|---|
-| Experimentar o E OS (sem instalar) | Liga o sistema direto do pendrive, já na interface Fusão, sem mexer no disco. Usuário `eos`, senha `live`. |
-| Instalar o E OS | Instalador gráfico |
+| Experimentar o E OS (sem instalar) | Liga o sistema direto do pendrive, já na interface Fusão, sem mexer no disco. Usuário `eos`, senha `live`. Por aqui também se instala o E OS. |
+| Instalar o E OS | Instalador do Debian, para instalar sem abrir a interface |
 | Instalar o E OS (modo texto) | O mesmo instalador em modo texto, que precisa de menos memória |
 | Mais opções | Modo seguro, reparo de um sistema instalado e, no UEFI, configurações do firmware |
 
-O instalador pergunta, nesta ordem:
+### Pela interface (recomendado)
+
+Escolha **Experimentar o E OS** e, na área de trabalho, clique em **Instalar o E OS**, o primeiro ícone do dock (ou procure "Instalar" na busca). O instalador gráfico, com a cara do E OS, pergunta:
+
+1. **Bem-vindo:** o idioma (Português do Brasil já vem selecionado);
+2. **Localização:** o fuso horário no mapa (São Paulo já vem marcado) e o formato de números e datas;
+3. **Teclado:** modelo e layout, com um campo para testar;
+4. **Partições:** formatar o disco inteiro ou particionar à mão, com a opção de criptografar o sistema;
+5. **Usuários:** seu nome, usuário, nome do computador e senha (esse usuário administra o sistema com `sudo`);
+6. **Resumo:** tudo o que vai ser feito, para conferir antes de começar.
+
+> **Atenção:** "Formatar o disco" apaga tudo o que estiver no disco escolhido.
+
+Enquanto copia o sistema, o instalador mostra dicas da interface Fusão. No fim, deixe marcado **Reiniciar agora**, clique em **Concluído** e tire o pendrive.
+
+| | |
+|---|---|
+| ![Boas-vindas](docs/img/calamares-1-boas-vindas.png) | ![Localização](docs/img/calamares-2-localizacao.png) |
+| Boas-vindas | Localização |
+| ![Partições](docs/img/calamares-3-particoes.png) | ![Usuários](docs/img/calamares-4-usuarios.png) |
+| Partições | Usuários |
+| ![Instalando](docs/img/calamares-5-instalando.png) | ![Tudo pronto](docs/img/calamares-6-pronto.png) |
+| Instalando, com dicas da interface | Tudo pronto |
+
+### Pelo menu de boot
+
+As opções **Instalar o E OS** do menu de boot abrem o instalador do Debian, em modo gráfico ou texto, sem carregar a interface. Ele pergunta, nesta ordem:
 
 1. idioma (Português do Brasil já vem selecionado);
 2. região;
@@ -91,9 +117,7 @@ O instalador pergunta, nesta ordem:
 
 > **Atenção:** as opções de "disco inteiro" apagam tudo o que estiver no disco escolhido.
 
-No particionamento assistido, o E OS cria a partição EFI quando o PC é UEFI e não cria partição de swap: ele usa zram, uma swap comprimida na própria memória. Precisa de um disco de pelo menos 8 GB.
-
-No fim, tire o pendrive e reinicie. No sistema instalado, entre com seu usuário no primeiro terminal e a interface abre sozinha. O instalador é o do Debian, no modo que copia o próprio E OS da ISO para o disco, então funciona sem internet.
+No fim, tire o pendrive e reinicie.
 
 | | |
 |---|---|
@@ -101,6 +125,14 @@ No fim, tire o pendrive e reinicie. No sistema instalado, entre com seu usuário
 | Idioma | Teclado |
 | ![Escolha do fuso horário](docs/img/instalador-4-fuso-horario.png) | ![Método de particionamento](docs/img/instalador-5-particionamento.png) |
 | Fuso horário | Onde instalar |
+
+### Depois de instalar
+
+No sistema instalado, entre com seu usuário no primeiro terminal e a interface abre sozinha.
+
+O instalador gráfico foi testado no QEMU com 1 GB de memória, em BIOS e em UEFI, inclusive com o Secure Boot ligado.
+
+Os dois instaladores copiam o próprio E OS da ISO para o disco, então funcionam sem internet. Quando usam o disco inteiro, eles criam a partição EFI se o PC for UEFI e não criam partição de swap: o E OS usa zram, uma swap comprimida na própria memória. Precisa de um disco de pelo menos 8 GB.
 
 ## Testar
 
@@ -110,7 +142,7 @@ No fim, tire o pendrive e reinicie. No sistema instalado, entre com seu usuário
 ```
 
 - `test` liga a ISO no QEMU, sem janela e com 1 GB de RAM, em modo BIOS e em modo UEFI. Ele entra no sistema, confere a interface, a memória, a rede e os serviços, e desliga. Os relatórios ficam em `out/teste-bios.log` e `out/teste-uefi.log`.
-- `install-test` instala o E OS num disco virtual de 8 GB, com respostas automáticas e 1 GB de RAM, e depois liga o sistema instalado para conferir se ele funciona. A última tela do instalador fica em `out/instalacao-*.png` (se ele parar numa pergunta, é ali que dá para ver qual) e o relatório do sistema instalado em `out/teste-instalado-*.log`.
+- `install-test` instala o E OS pelo instalador do menu de boot num disco virtual de 8 GB, com respostas automáticas e 1 GB de RAM, e depois liga o sistema instalado para conferir se ele funciona. A última tela do instalador fica em `out/instalacao-*.png` (se ele parar numa pergunta, é ali que dá para ver qual) e o relatório do sistema instalado em `out/teste-instalado-*.log`.
 
 O Docker Desktop no Windows não oferece aceleração de virtualização (KVM) para o QEMU, então os testes rodam em emulação e demoram: alguns minutos o `test` e uns 20 minutos o `install-test`.
 
@@ -128,9 +160,9 @@ O Docker Desktop no Windows não oferece aceleração de virtualização (KVM) p
 
 | Pasta | Conteúdo |
 |---|---|
-| `os/` | Definição da imagem, no formato do live-build: pacotes, menus de boot, respostas do instalador e os arquivos do sistema |
+| `os/` | Definição da imagem, no formato do live-build: pacotes, menus de boot, os dois instaladores e os arquivos do sistema |
 | `os/config/includes.chroot/usr/share/eos/` | A interface Fusão: barra e dock, painel rápido, busca, ícones e tema |
-| `branding/` | Logo (tesserato), papel de parede e faixa do instalador, que o build converte em imagem |
+| `branding/` | Logo (tesserato), papel de parede e imagens dos instaladores, que o build converte em PNG |
 | `tools/` | Ambiente de build (Docker) e scripts de build e teste |
 | `docs/` | Especificação, decisões e roteiro |
 | `out/` | ISOs e relatórios gerados (fica fora do git) |

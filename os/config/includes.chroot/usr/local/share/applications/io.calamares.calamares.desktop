@@ -1,0 +1,10 @@
+[Desktop Entry]
+# E OS: a janela do instalador (Calamares) se identifica como
+# "io.calamares.calamares". Com este arquivo, o dock e a barra de título
+# mostram o ícone do instalador do E OS em vez de um ícone genérico.
+# Fica fora da busca de apps (NoDisplay); o atalho visível é o eos-instalar.
+Type=Application
+Name=Instalar o E OS
+Exec=/usr/lib/eos/instalar
+Icon=/usr/share/eos/icones/instalar.svg
+NoDisplay=true

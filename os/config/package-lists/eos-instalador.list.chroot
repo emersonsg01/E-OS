@@ -4,6 +4,12 @@ calamares
 calamares-settings-debian
 # O Calamares só "recomenda" o squashfs-tools, mas precisa dele para copiar o sistema.
 squashfs-tools
+# Formata a partição EFI (FAT32) nos PCs UEFI. Também fica no sistema
+# instalado, que precisa dele para checar essa partição no boot.
+dosfstools
+# Plugin do Qt 6 para abrir janelas no Wayland (sem ele o Calamares aborta
+# com "Could not find the Qt platform plugin wayland").
+qt6-wayland
 # Slides durante a instalação (Qt 6)
 qml6-module-qtquick
 qml6-module-qtquick-window
