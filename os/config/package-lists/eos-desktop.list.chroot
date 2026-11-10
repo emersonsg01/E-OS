@@ -1,0 +1,51 @@
+# E OS 0.2: interface gráfica Fusão (Wayland), leve e modular.
+
+# Compositor, barra/dock, notificações/painel rápido e busca
+labwc
+waybar
+sway-notification-center
+fuzzel
+swaybg
+swaylock
+swayidle
+xwayland
+dbus-user-session
+librsvg2-common
+libgl1-mesa-dri
+xdg-desktop-portal-wlr
+xdg-desktop-portal-gtk
+xdg-utils
+xdg-user-dirs
+lxpolkit
+libnotify-bin
+
+# Aparência
+fonts-inter
+fonts-font-awesome
+fonts-dejavu-core
+adwaita-icon-theme
+bibata-cursor-theme
+
+# Aplicativos
+foot
+thunar
+gvfs
+mousepad
+firefox-esr
+firefox-esr-l10n-pt-br
+
+# Som
+pipewire
+pipewire-pulse
+wireplumber
+pulseaudio-utils
+
+# Rede (com ícone e menu de Wi-Fi na barra)
+network-manager
+network-manager-gnome
+
+# Utilitários da interface
+brightnessctl
+grim
+slurp
+wlr-randr

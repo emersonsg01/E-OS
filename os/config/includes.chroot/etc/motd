@@ -1,0 +1,20 @@
+
+ _____    ___  ____
+| ____|  / _ \/ ___|
+|  _|   | | | \___ \
+| |___  | |_| |___) |
+|_____|  \___/|____/
+
+Bem-vindo ao E OS 0.2 (Fusão), baseado no Debian 13.
+A interface gráfica abre sozinha no primeiro terminal (tty1).
+
+Comandos úteis:
+  free -h          memória em uso
+  htop             processos e consumo
+  ip -br addr      rede
+  sudo poweroff    desligar
+
+O E OS é baseado no Debian GNU/Linux. Os programas incluídos são software
+livre; os termos de cada um estão em /usr/share/doc/*/copyright.
+O E OS vem SEM NENHUMA GARANTIA, na medida permitida pela lei.
+

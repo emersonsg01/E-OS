@@ -1,0 +1,65 @@
+#!/usr/bin/expect -f
+# Acompanha uma instalação automática no QEMU pelo monitor do QEMU: grava uma
+# foto da tela a cada 30 s até a máquina desligar sozinha no fim.
+# Falha se a tela ficar 20 minutos sem mudar (instalador parado numa pergunta;
+# a última foto mostra qual) ou se a instalação passar de 90 minutos.
+# Quem confirma que a instalação deu certo é o teste de boot que vem depois.
+# Uso: expect qemu-instalar.exp <foto.png> <comando do qemu com -monitor stdio...>
+#
+# Atenção: em "expect { ... }" cada padrão precisa ficar na sua própria linha.
+# Com tudo numa linha só, o expect trata o bloco inteiro como um único padrão.
+
+set foto [lindex $argv 0]
+set qemu [lrange $argv 1 end]
+log_user 0
+set inicio [clock seconds]
+proc minutos {} { global inicio; expr {([clock seconds] - $inicio) / 60} }
+proc terminou {} { send_user "Instalação terminou em [minutos] min\n"; exit 0 }
+
+set timeout 60
+spawn {*}$qemu
+expect "(qemu)"
+
+# Quando o QEMU fecha logo depois de responder, o expect pode ler a resposta
+# e o fim do processo juntos e fechar a conexão sem passar pelo "eof". Por
+# isso todo expect fica dentro de catch: conexão fechada = QEMU terminou.
+set hash_ant ""
+set t_mudou $inicio
+while {1} {
+  set timeout 30
+  set fim 1
+  catch {
+    expect {
+      eof     { set fim 1 }
+      timeout { set fim 0 }
+    }
+  }
+  if {$fim} { terminou }
+
+  set timeout 60
+  if {[catch {send "screendump $foto -f png\r"}]} { terminou }
+  set fim 1
+  catch {
+    expect {
+      "(qemu)" { set fim 0 }
+      eof      { set fim 1 }
+      timeout  { set fim 0 }
+    }
+  }
+  if {$fim} { terminou }
+
+  if {[catch {exec md5sum $foto} saida]} { continue }
+  set h [lindex $saida 0]
+  set agora [clock seconds]
+  if {$h ne $hash_ant} { set hash_ant $h; set t_mudou $agora }
+  if {$agora - $t_mudou > 1200} {
+    send_user "FALHA: a tela ficou 20 minutos parada (veja $foto)\n"
+    catch {send "quit\r"}
+    exit 1
+  }
+  if {$agora - $inicio > 5400} {
+    send_user "FALHA: a instalação passou de 90 minutos (veja $foto)\n"
+    catch {send "quit\r"}
+    exit 1
+  }
+}

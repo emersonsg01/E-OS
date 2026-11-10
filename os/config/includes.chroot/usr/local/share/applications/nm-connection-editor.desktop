@@ -1,0 +1,13 @@
+[Desktop Entry]
+# E OS: mesmo atalho do NetworkManager, com nome mais simples e ícone do E OS
+# (o ícone original não existe no tema Adwaita).
+Type=Application
+Name=Network Connections
+Name[pt_BR]=Configurações de rede
+Comment=Manage and change your network connection settings
+Comment[pt_BR]=Gerencie e altere as conexões de rede
+Exec=nm-connection-editor
+Icon=/usr/share/eos/icones/rede.svg
+Terminal=false
+Categories=GTK;Settings;HardwareSettings;
+StartupNotify=true

@@ -1,0 +1,8 @@
+# E OS Fusão: variáveis de ambiente da interface e dos programas abertos nela.
+XDG_CURRENT_DESKTOP=labwc:wlroots
+XDG_CONFIG_DIRS=/usr/share/eos/xdg:/etc/xdg
+MOZ_ENABLE_WAYLAND=1
+QT_QPA_PLATFORM=wayland;xcb
+GDK_BACKEND=wayland,x11
+XCURSOR_THEME=Bibata-Modern-Classic
+XCURSOR_SIZE=24

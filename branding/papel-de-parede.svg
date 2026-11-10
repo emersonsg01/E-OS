@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <!-- Papel de parede da interface Fusão: aurora em azul, violeta e
+       turquesa, com o tesserato do E OS bem sutil à direita.
+       O build converte em PNG (tools/build.sh). -->
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#060a14"/>
+      <stop offset="0.55" stop-color="#0a1022"/>
+      <stop offset="1" stop-color="#0d0a1f"/>
+    </linearGradient>
+    <filter id="desfoque" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="130"/>
+    </filter>
+    <linearGradient id="interno" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#5b8cff"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#base)"/>
+
+  <!-- Aurora -->
+  <g filter="url(#desfoque)">
+    <ellipse cx="380" cy="230" rx="520" ry="300" fill="#2f6bff" opacity="0.50"/>
+    <ellipse cx="1540" cy="260" rx="500" ry="320" fill="#8b5cf6" opacity="0.42"/>
+    <ellipse cx="1160" cy="900" rx="640" ry="260" fill="#0ea5e9" opacity="0.30"/>
+    <ellipse cx="260" cy="940" rx="420" ry="220" fill="#ec4899" opacity="0.18"/>
+  </g>
+
+  <!-- Tesserato gigante e sutil -->
+  <g transform="translate(1150 160) scale(7.4)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 32L32.9 41.9M68 32L58.1 41.9M68 88L58.1 67.1M12 88L32.9 67.1M32 12L41.9 32.9M88 12L67.1 32.9M88 68L67.1 58.1M32 68L41.9 58.1"
+          stroke="#8fb3ff" stroke-opacity="0.08" stroke-width="0.35"/>
+    <path d="M12 32H68V88H12ZM32 12H88V68H32ZM12 32L32 12M68 32L88 12M68 88L88 68M12 88L32 68"
+          stroke="#ffffff" stroke-opacity="0.09" stroke-width="0.45"/>
+    <path d="M32.9 41.9H58.1V67.1H32.9ZM41.9 32.9H67.1V58.1H41.9ZM32.9 41.9L41.9 32.9M58.1 41.9L67.1 32.9M58.1 67.1L67.1 58.1M32.9 67.1L41.9 58.1"
+          stroke="url(#interno)" stroke-opacity="0.18" stroke-width="0.45"/>
+  </g>
+
+  <!-- Fios de luz -->
+  <path d="M -100 780 C 400 620, 900 920, 1400 720 S 2100 540, 2100 540" fill="none" stroke="#8fb3ff" stroke-opacity="0.14" stroke-width="2"/>
+  <path d="M -100 820 C 420 670, 920 970, 1420 760 S 2100 590, 2100 590" fill="none" stroke="#c4b5fd" stroke-opacity="0.10" stroke-width="2"/>
+</svg>

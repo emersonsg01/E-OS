@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480">
+  <!-- Fundo do menu de boot do E OS: o tesserato (logo) e o nome.
+       Tudo desenhado com formas, sem texto, porque o ambiente de build
+       não tem fontes instaladas. -->
+  <defs>
+    <linearGradient id="fundo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d1117"/>
+      <stop offset="1" stop-color="#17213a"/>
+    </linearGradient>
+    <radialGradient id="brilho" cx="0.5" cy="0.22" r="0.55">
+      <stop offset="0" stop-color="#4f8cff" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#4f8cff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="interno" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#5b8cff"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="url(#fundo)"/>
+  <rect width="640" height="480" fill="url(#brilho)"/>
+
+  <!-- Tesserato -->
+  <g transform="translate(122 50) scale(1)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 32L32.9 41.9M68 32L58.1 41.9M68 88L58.1 67.1M12 88L32.9 67.1M32 12L41.9 32.9M88 12L67.1 32.9M88 68L67.1 58.1M32 68L41.9 58.1"
+          stroke="#8fb3ff" stroke-opacity="0.55" stroke-width="2"/>
+    <path d="M12 32H68V88H12ZM32 12H88V68H32ZM12 32L32 12M68 32L88 12M68 88L88 68M12 88L32 68"
+          stroke="#f5f7fa" stroke-width="3.6"/>
+    <path d="M32.9 41.9H58.1V67.1H32.9ZM41.9 32.9H67.1V58.1H41.9ZM32.9 41.9L41.9 32.9M58.1 41.9L67.1 32.9M58.1 67.1L67.1 58.1M32.9 67.1L41.9 58.1"
+          stroke="url(#interno)" stroke-width="3.6"/>
+  </g>
+
+  <!-- Nome "E OS" -->
+  <g transform="translate(52 0)">
+    <g fill="#f5f7fa">
+      <rect x="185" y="60" width="14" height="80" rx="3"/>
+      <rect x="185" y="60" width="58" height="14" rx="3"/>
+      <rect x="185" y="93" width="48" height="14" rx="3"/>
+      <rect x="185" y="126" width="58" height="14" rx="3"/>
+    </g>
+    <circle cx="327" cy="100" r="33" fill="none" stroke="#f5f7fa" stroke-width="14"/>
+    <path d="M 446 78 C 439 69, 429 67, 419 67 C 402 67, 391 75, 391 85 C 391 97, 403 99, 419 100 C 435 101, 447 106, 447 117 C 447 127, 435 133, 419 133 C 407 133, 396 130, 390 121"
+          fill="none" stroke="#f5f7fa" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Linha de destaque -->
+  <rect x="290" y="166" width="60" height="4" rx="2" fill="#4f8cff"/>
+</svg>

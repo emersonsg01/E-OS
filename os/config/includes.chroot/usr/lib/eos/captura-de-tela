@@ -1,0 +1,10 @@
+#!/bin/sh
+# E OS: captura a tela inteira para a pasta Imagens e avisa com uma notificação.
+# Uso: captura-de-tela [segundos de espera]
+sleep "${1:-0}"
+pasta=$(xdg-user-dir PICTURES 2>/dev/null || echo "$HOME")
+mkdir -p "$pasta"
+arquivo="$pasta/captura-$(date +%Y%m%d-%H%M%S).png"
+if grim "$arquivo"; then
+  notify-send -a "E OS" -i "$arquivo" "Captura de tela salva" "$arquivo"
+fi

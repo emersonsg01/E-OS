@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!--
+  E OS Fusão: configuração do compositor labwc.
+  Atalhos: Super+Espaço busca · Super+A painel rápido · Super+E arquivos ·
+  Super+Enter terminal · Super+B navegador · Super+L bloqueia · Super+setas
+  organizam janelas · Alt+Tab troca de janela · Print captura a tela.
+-->
+<labwc_config>
+
+  <core>
+    <decoration>server</decoration>
+    <gap>6</gap>
+  </core>
+
+  <placement>
+    <policy>center</policy>
+  </placement>
+
+  <theme>
+    <name>E-OS</name>
+    <icon>Adwaita</icon>
+    <titlebar>
+      <layout>icon:iconify,max,close</layout>
+      <showTitle>yes</showTitle>
+    </titlebar>
+    <cornerRadius>10</cornerRadius>
+    <keepBorder>yes</keepBorder>
+    <dropShadows>yes</dropShadows>
+    <font>
+      <name>Inter</name>
+      <size>10</size>
+      <weight>bold</weight>
+    </font>
+    <font place="MenuItem">
+      <name>Inter</name>
+      <size>10</size>
+    </font>
+    <font place="OnScreenDisplay">
+      <name>Inter</name>
+      <size>11</size>
+    </font>
+  </theme>
+
+  <windowSwitcher show="yes" preview="yes" outlines="yes" allWorkspaces="no" />
+
+  <keyboard>
+    <keybind key="A-Tab"><action name="NextWindow" /></keybind>
+    <keybind key="A-S-Tab"><action name="PreviousWindow" /></keybind>
+    <keybind key="A-F4"><action name="Close" /></keybind>
+
+    <keybind key="W-space"><action name="Execute" command="fuzzel" /></keybind>
+    <keybind key="W-s"><action name="Execute" command="fuzzel" /></keybind>
+    <keybind key="W-a"><action name="Execute" command="swaync-client -t -sw" /></keybind>
+    <keybind key="W-n"><action name="Execute" command="swaync-client -t -sw" /></keybind>
+    <keybind key="W-Return"><action name="Execute" command="foot" /></keybind>
+    <keybind key="C-A-t"><action name="Execute" command="foot" /></keybind>
+    <keybind key="W-e"><action name="Execute" command="thunar" /></keybind>
+    <keybind key="W-b"><action name="Execute" command="firefox-esr" /></keybind>
+    <keybind key="W-l"><action name="Execute" command="swaylock -f -i /usr/share/backgrounds/eos/fusao.png" /></keybind>
+
+    <keybind key="W-Up"><action name="ToggleMaximize" /></keybind>
+    <keybind key="W-Down"><action name="Iconify" /></keybind>
+    <keybind key="W-Left"><action name="SnapToEdge" direction="left" /></keybind>
+    <keybind key="W-Right"><action name="SnapToEdge" direction="right" /></keybind>
+
+    <keybind key="Print"><action name="Execute" command="/usr/lib/eos/captura-de-tela" /></keybind>
+
+    <keybind key="XF86_AudioRaiseVolume"><action name="Execute" command="pactl set-sink-volume @DEFAULT_SINK@ +5%" /></keybind>
+    <keybind key="XF86_AudioLowerVolume"><action name="Execute" command="pactl set-sink-volume @DEFAULT_SINK@ -5%" /></keybind>
+    <keybind key="XF86_AudioMute"><action name="Execute" command="pactl set-sink-mute @DEFAULT_SINK@ toggle" /></keybind>
+    <keybind key="XF86_MonBrightnessUp"><action name="Execute" command="brightnessctl set +10%" /></keybind>
+    <keybind key="XF86_MonBrightnessDown"><action name="Execute" command="brightnessctl set 10%-" /></keybind>
+  </keyboard>
+
+  <mouse>
+    <default />
+  </mouse>
+
+  <libinput>
+    <device category="touchpad">
+      <tap>yes</tap>
+      <naturalScroll>yes</naturalScroll>
+    </device>
+  </libinput>
+
+</labwc_config>

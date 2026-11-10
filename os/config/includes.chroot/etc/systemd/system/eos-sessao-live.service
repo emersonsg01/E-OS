@@ -1,0 +1,15 @@
+# E OS: ajustes que só valem na sessão live (pen drive ou DVD).
+# No sistema instalado a condição abaixo é falsa e nada roda.
+[Unit]
+Description=E OS: ajustes da sessão live
+ConditionKernelCommandLine=boot=live
+Before=getty-pre.target
+Wants=getty-pre.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/sh /usr/lib/eos/sessao-live
+
+[Install]
+WantedBy=multi-user.target

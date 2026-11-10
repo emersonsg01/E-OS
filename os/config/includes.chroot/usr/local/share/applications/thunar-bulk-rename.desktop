@@ -1,0 +1,5 @@
+[Desktop Entry]
+# E OS: escondido da busca de apps (atalho técnico ou repetido).
+Type=Application
+Name=thunar-bulk-rename
+NoDisplay=true

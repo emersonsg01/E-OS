@@ -1,0 +1,88 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "positionX": "right",
+  "positionY": "top",
+  "layer": "overlay",
+  "control-center-layer": "top",
+  "layer-shell": true,
+  "cssPriority": "user",
+  "control-center-margin-top": 8,
+  "control-center-margin-bottom": 8,
+  "control-center-margin-right": 10,
+  "control-center-margin-left": 0,
+  "notification-2fa-action": true,
+  "notification-inline-replies": false,
+  "notification-icon-size": 48,
+  "notification-body-image-height": 100,
+  "notification-body-image-width": 200,
+  "timeout": 6,
+  "timeout-low": 4,
+  "timeout-critical": 0,
+  "fit-to-screen": false,
+  "relative-timestamps": false,
+  "control-center-width": 400,
+  "control-center-height": 660,
+  "notification-window-width": 380,
+  "keyboard-shortcuts": true,
+  "image-visibility": "when-available",
+  "transition-time": 180,
+  "hide-on-clear": false,
+  "hide-on-action": true,
+  "text-empty": "Nenhuma notificação",
+  "script-fail-notify": true,
+  "widgets": [
+    "title",
+    "buttons-grid",
+    "volume",
+    "mpris",
+    "dnd",
+    "notifications"
+  ],
+  "widget-config": {
+    "title": {
+      "text": "Painel rápido",
+      "clear-all-button": true,
+      "button-text": "Limpar"
+    },
+    "dnd": {
+      "text": "Não perturbe"
+    },
+    "volume": {
+      "label": ""
+    },
+    "mpris": {
+      "image-size": 72,
+      "image-radius": 14
+    },
+    "buttons-grid": {
+      "actions": [
+        {
+          "label": "    Wi-Fi",
+          "type": "toggle",
+          "command": "/usr/lib/eos/wifi alternar",
+          "update-command": "/usr/lib/eos/wifi estado"
+        },
+        {
+          "label": "    Arquivos",
+          "command": "thunar"
+        },
+        {
+          "label": "    Captura",
+          "command": "/usr/lib/eos/captura-de-tela 1"
+        },
+        {
+          "label": "    Bloquear",
+          "command": "swaylock -f -i /usr/share/backgrounds/eos/fusao.png"
+        },
+        {
+          "label": "    Reiniciar",
+          "command": "systemctl reboot"
+        },
+        {
+          "label": "    Desligar",
+          "command": "systemctl poweroff"
+        }
+      ]
+    }
+  }
+}

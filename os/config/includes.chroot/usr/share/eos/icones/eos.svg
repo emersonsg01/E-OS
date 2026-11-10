@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="6 6 88 88">
+  <!-- E OS: tesserato da barra superior (abre o menu do sistema).
+       Traços grossos para ficar nítido em tamanho pequeno. -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 32L32.9 41.9M68 32L58.1 41.9M68 88L58.1 67.1M12 88L32.9 67.1M32 12L41.9 32.9M88 12L67.1 32.9M88 68L67.1 58.1M32 68L41.9 58.1"
+          stroke="#ffffff" stroke-opacity="0.55" stroke-width="4.5"/>
+    <path d="M12 32H68V88H12ZM32 12H88V68H32ZM12 32L32 12M68 32L88 12M68 88L88 68M12 88L32 68"
+          stroke="#ffffff" stroke-width="6.5"/>
+    <path d="M32.9 41.9H58.1V67.1H32.9ZM41.9 32.9H67.1V58.1H41.9ZM32.9 41.9L41.9 32.9M58.1 41.9L67.1 32.9M58.1 67.1L67.1 58.1M32.9 67.1L41.9 58.1"
+          stroke="#8fb3ff" stroke-width="6.5"/>
+  </g>
+</svg>

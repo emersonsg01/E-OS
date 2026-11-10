@@ -1,0 +1,47 @@
+#!/usr/bin/expect -f
+# Liga o E OS no QEMU, entra pelo console serial, coleta um relatório e desliga.
+# Uso: expect qemu-smoke.exp <log> <usuário> <senha> <máquina> <comando do qemu...>
+
+lassign $argv arquivo usuario senha maquina
+set qemu [lrange $argv 4 end]
+log_file -noappend $arquivo
+set inicio [clock seconds]
+
+# Sem aceleração (KVM), o boot pode levar alguns minutos.
+set timeout 1200
+spawn {*}$qemu
+
+set tentativas 0
+expect {
+  -ex "$maquina login: " {
+    incr tentativas
+    if {$tentativas > 2} { send_user "\nFALHA: login recusado\n"; exit 1 }
+    send "$usuario\r"
+    exp_continue
+  }
+  -re {(Senha|Password): $} { send "$senha\r"; exp_continue }
+  -ex "$usuario@$maquina:~$ " {}
+  timeout { send_user "\nFALHA: o sistema não chegou ao prompt em $timeout s\n"; exit 1 }
+  eof     { send_user "\nFALHA: o QEMU terminou antes do login\n"; exit 1 }
+}
+send_user "\n>>> Prompt alcançado em [expr {[clock seconds] - $inicio}] s\n"
+
+# Relatório. As marcas têm aspas no meio ("f""im") para que o eco do comando
+# digitado não seja confundido com a saída.
+set relatorio {export SYSTEMD_PAGER=cat; sleep 20; echo "=== E OS: rel""atorio ==="; cat /etc/os-release; uname -r; hostname; systemd-analyze; systemctl is-system-running; systemctl --failed --no-legend; free -m; cat /proc/swaps; grep -E '^(MemTotal|MemFree|MemAvailable|Buffers|Cached|AnonPages|Shmem|Slab|SReclaimable|SUnreclaim|KernelStack|PageTables|Percpu|VmallocUsed):' /proc/meminfo; ps -eo rss,comm --sort=-rss | head -n 12; ip -br addr; getent hosts deb.debian.org; cat /etc/default/locale; grep -E '^XKB(LAYOUT|MODEL)' /etc/default/keyboard; readlink /etc/localtime; findmnt -n -o SOURCE,FSTYPE /; dpkg-query -W -f '${Package} ${db:Status-Abbrev}\n' live-boot live-config 2>&1; pgrep -a -f 'labwc|waybar|swaync|swaybg|nm-applet|pipewire|wireplumber' | cut -c1-90; tail -n 5 /run/user/*/eos-*.log 2>/dev/null; grep -E 'ANDROID_BINDER' /boot/config-$(uname -r); find /lib/modules/$(uname -r) -name '*binder*'; sudo modprobe -v binder_linux; grep binder /proc/filesystems; echo "=== f""im ==="}
+set timeout 300
+send -- "$relatorio\r"
+expect {
+  -re {\[sudo\][^\n]*: $} { send "$senha\r"; exp_continue }
+  -ex "=== fim ===" {}
+  timeout { send_user "\nFALHA: o relatório não terminou\n"; exit 1 }
+}
+
+send -- "sudo poweroff\r"
+expect {
+  -re {\[sudo\][^\n]*: $} { send "$senha\r"; exp_continue }
+  eof {}
+  timeout { send_user "\nFALHA: o sistema não desligou\n"; exit 1 }
+}
+send_user "\n>>> OK: boot, login, relatório e desligamento em [expr {[clock seconds] - $inicio}] s\n"
+exit 0

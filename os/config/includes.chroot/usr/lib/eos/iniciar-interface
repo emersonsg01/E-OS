@@ -1,0 +1,19 @@
+#!/bin/sh
+# E OS: inicia a interface gráfica Fusão (compositor labwc).
+# Chamado pelo /etc/profile.d/eos-interface.sh ao entrar no tty1.
+
+# Teclado: o mesmo escolhido na instalação (ou na sessão live).
+if [ -r /etc/default/keyboard ]; then
+  . /etc/default/keyboard
+  export XKB_DEFAULT_LAYOUT="$XKBLAYOUT" XKB_DEFAULT_VARIANT="$XKBVARIANT"
+  export XKB_DEFAULT_MODEL="$XKBMODEL" XKB_DEFAULT_OPTIONS="$XKBOPTIONS"
+fi
+
+# Sem placa de vídeo com aceleração (máquina virtual, placa antiga ou sem
+# driver): desenho por software, que funciona em qualquer máquina.
+if ! ls /dev/dri/renderD* >/dev/null 2>&1; then
+  export WLR_RENDERER=pixman
+  export WLR_NO_HARDWARE_CURSORS=1
+fi
+
+exec labwc

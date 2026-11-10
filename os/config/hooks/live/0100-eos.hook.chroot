@@ -1,0 +1,36 @@
+#!/bin/sh
+# Ajustes do E OS dentro da imagem. Roda no chroot, durante o build.
+set -e
+
+echo "E OS: identidade do sistema"
+# os-release próprio. O dpkg-divert guarda o original e preserva o nosso
+# quando o pacote base-files for atualizado.
+if [ ! -e /usr/lib/os-release.debian ]; then
+  dpkg-divert --local --rename --divert /usr/lib/os-release.debian --add /usr/lib/os-release
+fi
+cat > /usr/lib/os-release <<'EOF'
+PRETTY_NAME="E OS 0.2 (Fusão)"
+NAME="E OS"
+VERSION_ID="0.2"
+VERSION="0.2 (Fusão)"
+VERSION_CODENAME=trixie
+ID=eos
+ID_LIKE=debian
+EOF
+ln -sf ../usr/lib/os-release /etc/os-release
+
+echo "E OS: idiomas pré-gerados (boot mais rápido)"
+sed -i -e 's/^# *\(pt_BR\.UTF-8 UTF-8\)/\1/' -e 's/^# *\(en_US\.UTF-8 UTF-8\)/\1/' /etc/locale.gen
+locale-gen
+update-locale LANG=pt_BR.UTF-8
+
+echo "E OS: rede com NetworkManager e DNS com systemd-resolved"
+systemctl enable NetworkManager.service systemd-resolved.service
+
+echo "E OS: ajustes que só valem na sessão live"
+systemctl enable eos-sessao-live.service
+
+echo "E OS: removendo documentação (as licenças ficam)"
+find /usr/share/doc -type f ! -name copyright -delete
+find /usr/share/doc -type d -empty -delete
+rm -rf /usr/share/man/* /usr/share/info/* /usr/share/lintian/*

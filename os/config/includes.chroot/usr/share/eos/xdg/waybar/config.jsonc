@@ -1,0 +1,152 @@
+// E OS Fusão: barra superior e dock (Waybar).
+// Ícones dos módulos: fonte Font Awesome 4.7 (escritos como \uXXXX).
+[
+  {
+    // Barra superior: menu do sistema e busca à esquerda, relógio no centro,
+    // status e notificações à direita (como no macOS, Android e ChromeOS).
+    "name": "barra",
+    "layer": "top",
+    "position": "top",
+    "height": 34,
+    "margin-top": 6,
+    "margin-left": 10,
+    "margin-right": 10,
+    "spacing": 0,
+    "modules-left": ["image#eos", "custom/busca"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray", "group/status", "custom/notificacoes"],
+
+    "image#eos": {
+      "path": "/usr/share/eos/icones/eos.svg",
+      "size": 20,
+      "on-click": "/usr/lib/eos/menu-sistema"
+    },
+    "custom/busca": {
+      "format": "   Pesquisar",
+      "on-click": "fuzzel",
+      "tooltip": false
+    },
+    "clock": {
+      // O "L" faz o Waybar usar o idioma do sistema (seg, ter... em português).
+      "format": "{:L%a, %d de %b    %H:%M}",
+      "tooltip-format": "<tt>{calendar}</tt>",
+      "calendar": {
+        "mode": "month",
+        "format": { "today": "<span color='#8fb3ff'><b><u>{}</u></b></span>" }
+      }
+    },
+    "tray": {
+      "icon-size": 16,
+      "spacing": 10
+    },
+    "group/status": {
+      "orientation": "horizontal",
+      "modules": ["network", "pulseaudio", "battery"]
+    },
+    "network": {
+      "format-wifi": "",
+      "format-ethernet": "",
+      "format-linked": "",
+      "format-disconnected": "",
+      "tooltip-format-wifi": "Wi-Fi: {essid} ({signalStrength}%)",
+      "tooltip-format-ethernet": "Cabo: {ipaddr}",
+      "tooltip-format-disconnected": "Sem rede",
+      "on-click": "swaync-client -t -sw"
+    },
+    "pulseaudio": {
+      "format": "{icon}",
+      "format-muted": "",
+      "format-icons": { "default": ["", "", ""] },
+      "tooltip-format": "Volume: {volume}%",
+      "scroll-step": 5,
+      "on-click": "swaync-client -t -sw",
+      "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    },
+    "battery": {
+      "format": "{icon}  {capacity}%",
+      "format-charging": "  {capacity}%",
+      "format-icons": ["", "", "", "", ""],
+      "states": { "baixa": 20 },
+      "tooltip-format": "{timeTo}",
+      "on-click": "swaync-client -t -sw"
+    },
+    "custom/notificacoes": {
+      "tooltip": false,
+      "format": "{icon}",
+      "format-icons": {
+        "notification": "",
+        "none": "",
+        "dnd-notification": "",
+        "dnd-none": "",
+        "inhibited-notification": "",
+        "inhibited-none": "",
+        "dnd-inhibited-notification": "",
+        "dnd-inhibited-none": ""
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "swaync-client -t -sw",
+      "on-click-right": "swaync-client -d -sw",
+      "escape": true
+    }
+  },
+  {
+    // Dock flutuante no centro (macOS + barra de tarefas do Windows 11):
+    // Início, apps fixos e, depois da divisória, as janelas abertas.
+    "name": "dock",
+    "layer": "top",
+    "position": "bottom",
+    "height": 62,
+    "margin-bottom": 8,
+    "spacing": 0,
+    "modules-center": [
+      "image#inicio",
+      "image#arquivos",
+      "image#navegador",
+      "image#terminal",
+      "image#editor",
+      "custom/divisoria",
+      "wlr/taskbar"
+    ],
+
+    "image#inicio": {
+      "path": "/usr/share/eos/icones/inicio.svg",
+      "size": 42,
+      "on-click": "fuzzel"
+    },
+    "image#arquivos": {
+      "path": "/usr/share/eos/icones/arquivos.svg",
+      "size": 42,
+      "on-click": "thunar"
+    },
+    "image#navegador": {
+      "path": "/usr/share/eos/icones/navegador.svg",
+      "size": 42,
+      "on-click": "firefox-esr"
+    },
+    "image#terminal": {
+      "path": "/usr/share/eos/icones/terminal.svg",
+      "size": 42,
+      "on-click": "foot"
+    },
+    "image#editor": {
+      "path": "/usr/share/eos/icones/editor.svg",
+      "size": 42,
+      "on-click": "mousepad"
+    },
+    "custom/divisoria": {
+      "format": " ",
+      "tooltip": false
+    },
+    "wlr/taskbar": {
+      "format": "{icon}",
+      "icon-size": 38,
+      "icon-theme": "Adwaita",
+      "tooltip-format": "{title}",
+      "on-click": "activate",
+      "on-click-middle": "close",
+      "markup": false
+    }
+  }
+]

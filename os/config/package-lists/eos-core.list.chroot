@@ -1,0 +1,38 @@
+# E OS 0.1 Core: o mínimo para um sistema em modo texto.
+# Com --apt-recommends false, só entra o que está aqui e as dependências.
+
+# Sessão live (o user-setup cria o usuário "eos" da sessão live)
+live-boot
+live-config
+live-config-systemd
+user-setup
+systemd-sysv
+
+# Sistema (zstd: initrd menor e boot mais rápido)
+dbus
+libpam-systemd
+sudo
+systemd-timesyncd
+zstd
+
+# Rede: systemd-networkd (vem no systemd) e systemd-resolved
+systemd-resolved
+iproute2
+iputils-ping
+ca-certificates
+curl
+
+# Memória: swap comprimida na RAM (zram)
+systemd-zram-generator
+
+# Idioma e teclado
+locales
+console-setup
+keyboard-configuration
+
+# Utilitários
+bash-completion
+nano
+less
+htop
+procps

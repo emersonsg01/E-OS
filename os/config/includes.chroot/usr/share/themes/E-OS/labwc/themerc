@@ -1,0 +1,59 @@
+# E OS: tema das janelas da interface Fusão (labwc).
+# Escuro, cantos arredondados, sombra suave e botões redondos coloridos à
+# direita (cores do macOS, posição do Windows). As imagens dos botões são os
+# arquivos .svg desta pasta.
+
+border.width: 1
+window.titlebar.padding.width: 8
+window.titlebar.padding.height: 4
+
+window.active.border.color: #2b3445
+window.inactive.border.color: #1d2430
+
+window.active.title.bg.color: #161b26
+window.inactive.title.bg.color: #10141c
+
+window.active.label.text.color: #e6edf3
+window.inactive.label.text.color: #7d8590
+window.label.text.justify: center
+
+window.button.width: 24
+window.button.height: 24
+window.button.spacing: 2
+window.button.hover.bg.corner-radius: 12
+
+window.active.button.unpressed.image.color: #e6edf3
+window.inactive.button.unpressed.image.color: #7d8590
+
+window.active.shadow.size: 36
+window.inactive.shadow.size: 20
+window.active.shadow.color: #00000090
+window.inactive.shadow.color: #00000055
+
+menu.width.min: 190
+menu.width.max: 320
+menu.border.width: 1
+menu.border.color: #2b3445
+menu.items.bg.color: #161b26
+menu.items.text.color: #e6edf3
+menu.items.active.bg.color: #4f8cff
+menu.items.active.text.color: #ffffff
+menu.items.padding.x: 12
+menu.items.padding.y: 7
+menu.separator.width: 1
+menu.separator.padding.width: 10
+menu.separator.padding.height: 4
+menu.separator.color: #2b3445
+menu.title.bg.color: #161b26
+menu.title.text.color: #8b949e
+menu.title.text.justify: Center
+
+osd.bg.color: #161b26
+osd.border.color: #4f8cff
+osd.border.width: 1
+osd.label.text.color: #e6edf3
+osd.window-switcher.width: 50%
+osd.window-switcher.padding: 8
+osd.window-switcher.item.padding.x: 12
+osd.window-switcher.item.padding.y: 6
+osd.window-switcher.item.active.border.width: 2

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <!-- E OS: botão Início do dock (abre a busca de apps), com o tesserato -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b8cff"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="116" height="116" rx="32" fill="url(#g)"/>
+  <rect x="6" y="6" width="116" height="58" rx="32" fill="#ffffff" opacity="0.08"/>
+  <g transform="translate(20 20) scale(0.88)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 32L32.9 41.9M68 32L58.1 41.9M68 88L58.1 67.1M12 88L32.9 67.1M32 12L41.9 32.9M88 12L67.1 32.9M88 68L67.1 58.1M32 68L41.9 58.1"
+          stroke="#ffffff" stroke-opacity="0.6" stroke-width="3.4"/>
+    <path d="M12 32H68V88H12ZM32 12H88V68H32ZM12 32L32 12M68 32L88 12M68 88L88 68M12 88L32 68"
+          stroke="#ffffff" stroke-width="5"/>
+    <path d="M32.9 41.9H58.1V67.1H32.9ZM41.9 32.9H67.1V58.1H41.9ZM32.9 41.9L41.9 32.9M58.1 41.9L67.1 32.9M58.1 67.1L67.1 58.1M32.9 67.1L41.9 58.1"
+          stroke="#dbe7ff" stroke-width="5"/>
+  </g>
+</svg>

@@ -1,0 +1,8 @@
+#!/bin/sh
+# Ajustes da sessão live do E OS. Chamado pelo eos-sessao-live.service.
+# (As tarefas automáticas do apt ficam desligadas na sessão live por uma
+# condição nos próprios timers: /etc/systemd/system/apt-daily*.timer.d/.)
+
+# Aviso na tela de login com o usuário e a senha da sessão live.
+mkdir -p /etc/issue.d
+printf 'Sessão live: usuário eos, senha live\n\n' > /etc/issue.d/50-eos-live.issue

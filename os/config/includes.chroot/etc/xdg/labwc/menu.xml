@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- E OS Fusão: menu do botão direito na área de trabalho. -->
+<openbox_menu>
+  <menu id="root-menu" label="E OS">
+    <item label="Pesquisar apps"><action name="Execute" command="fuzzel" /></item>
+    <item label="Arquivos"><action name="Execute" command="thunar" /></item>
+    <item label="Navegador"><action name="Execute" command="firefox-esr" /></item>
+    <item label="Terminal"><action name="Execute" command="foot" /></item>
+    <separator />
+    <item label="Painel rápido"><action name="Execute" command="swaync-client -t -sw" /></item>
+    <item label="Capturar a tela"><action name="Execute" command="/usr/lib/eos/captura-de-tela" /></item>
+    <item label="Bloquear a tela"><action name="Execute" command="swaylock -f -i /usr/share/backgrounds/eos/fusao.png" /></item>
+    <separator />
+    <item label="Sair da sessão"><action name="Exit" /></item>
+    <item label="Reiniciar"><action name="Execute" command="systemctl reboot" /></item>
+    <item label="Desligar"><action name="Execute" command="systemctl poweroff" /></item>
+  </menu>
+</openbox_menu>

@@ -1,0 +1,129 @@
+/* E OS Fusão: barra superior e dock (Waybar, GTK3).
+   Paleta: fundo #111620 translúcido, texto #e6edf3, destaque #4f8cff. */
+
+* {
+  font-family: "Inter", "FontAwesome", sans-serif;
+  font-size: 13px;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+window#waybar {
+  background: transparent;
+  color: #e6edf3;
+}
+
+tooltip {
+  background: rgba(17, 22, 32, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+}
+tooltip label {
+  color: #e6edf3;
+  padding: 2px 4px;
+}
+
+/* ---------- Barra superior: três "pílulas" flutuantes ---------- */
+
+window#waybar.barra .modules-left,
+window#waybar.barra .modules-center,
+window#waybar.barra .modules-right {
+  background: rgba(17, 22, 32, 0.80);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 0 5px;
+}
+
+window#waybar.barra .modules-left > widget > *,
+window#waybar.barra .modules-center > widget > *,
+window#waybar.barra .modules-right > widget > * {
+  padding: 0 9px;
+  margin: 4px 1px;
+  border-radius: 10px;
+}
+
+window#waybar.barra #image.eos:hover,
+window#waybar.barra #custom-busca:hover,
+window#waybar.barra #clock:hover,
+window#waybar.barra #custom-notificacoes:hover,
+window#waybar.barra #status:hover {
+  background: rgba(255, 255, 255, 0.09);
+}
+
+window#waybar.barra #custom-busca {
+  color: #8b949e;
+  padding: 0 16px 0 12px;
+}
+
+window#waybar.barra #clock {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+/* Status (rede, som e bateria) juntos, como o "pill" do ChromeOS */
+window#waybar.barra #network,
+window#waybar.barra #pulseaudio,
+window#waybar.barra #battery {
+  padding: 0 7px;
+  margin: 4px 0;
+}
+window#waybar.barra #battery.baixa:not(.charging) {
+  color: #ff6b6b;
+}
+window#waybar.barra #network.disconnected {
+  color: #7d8590;
+}
+
+window#waybar.barra #custom-notificacoes {
+  padding: 0 11px;
+}
+window#waybar.barra #custom-notificacoes.notification,
+window#waybar.barra #custom-notificacoes.dnd-notification {
+  color: #8fb3ff;
+}
+
+/* ---------- Dock flutuante ---------- */
+
+window#waybar.dock .modules-center {
+  background: rgba(17, 22, 32, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 24px;
+  padding: 6px 8px;
+}
+
+window#waybar.dock #image {
+  padding: 4px 5px;
+  margin: 0 2px;
+  border-radius: 15px;
+}
+window#waybar.dock #image:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+window#waybar.dock #custom-divisoria {
+  min-width: 1px;
+  margin: 10px 8px;
+  background: rgba(255, 255, 255, 0.14);
+  font-size: 1px;
+}
+
+window#waybar.dock #taskbar button {
+  padding: 3px 5px;
+  margin: 0 2px;
+  border-radius: 15px;
+  background: transparent;
+  border-bottom: 3px solid transparent;
+}
+window#waybar.dock #taskbar button:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+window#waybar.dock #taskbar button.active {
+  background: rgba(79, 140, 255, 0.20);
+  border-bottom: 3px solid #4f8cff;
+}
+window#waybar.dock #taskbar button.minimized {
+  opacity: 0.55;
+}

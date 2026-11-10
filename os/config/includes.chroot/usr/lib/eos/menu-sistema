@@ -1,0 +1,21 @@
+#!/bin/sh
+# E OS: menu do sistema, aberto pelo tesserato no canto superior esquerdo
+# (como o menu da maçã no macOS). Aparece logo abaixo do logo.
+escolha=$(printf '%s\n' \
+  "Bloquear a tela" \
+  "Capturar a tela" \
+  "Painel rápido" \
+  "Sair da sessão" \
+  "Reiniciar" \
+  "Desligar" |
+  fuzzel --dmenu --prompt "E OS  › " --placeholder "" --lines 6 --width 22 \
+         --anchor top-left --x-margin 10 --y-margin 48)
+
+case "$escolha" in
+  "Bloquear a tela") swaylock -f -i /usr/share/backgrounds/eos/fusao.png ;;
+  "Capturar a tela") /usr/lib/eos/captura-de-tela 1 ;;
+  "Painel rápido")   swaync-client -t -sw ;;
+  "Sair da sessão")  labwc --exit ;;
+  "Reiniciar")       systemctl reboot ;;
+  "Desligar")        systemctl poweroff ;;
+esac

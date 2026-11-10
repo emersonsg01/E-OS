@@ -1,0 +1,11 @@
+# Fim de linha LF em tudo: os scripts rodam dentro do Linux.
+* text=auto eol=lf
+
+# Scripts do Windows ficam com CRLF.
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binários
+*.png binary
+*.iso binary
+*.img binary

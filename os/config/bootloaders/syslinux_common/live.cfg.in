@@ -1,0 +1,12 @@
+label live-@FLAVOUR@
+	menu label ^Experimentar o E OS (sem instalar)
+	menu default
+	linux @LINUX@
+	initrd @INITRD@
+	append @APPEND_LIVE@
+
+label live-@FLAVOUR@-failsafe
+	menu label Experimentar o E OS (^modo seguro)
+	linux @LINUX@
+	initrd @INITRD@
+	append @APPEND_LIVE_FAILSAFE@

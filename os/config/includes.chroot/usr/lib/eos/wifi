@@ -1,0 +1,12 @@
+#!/bin/sh
+# E OS: botão de Wi-Fi do painel rápido.
+#   wifi estado    -> imprime true/false (Wi-Fi ligado ou não)
+#   wifi alternar  -> liga ou desliga o Wi-Fi
+case "$1" in
+  estado)
+    if nmcli radio wifi 2>/dev/null | grep -q enabled; then echo true; else echo false; fi ;;
+  alternar)
+    if nmcli radio wifi 2>/dev/null | grep -q enabled; then nmcli radio wifi off; else nmcli radio wifi on; fi ;;
+  *)
+    echo "uso: wifi estado|alternar" >&2; exit 2 ;;
+esac
