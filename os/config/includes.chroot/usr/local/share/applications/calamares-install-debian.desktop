@@ -1,0 +1,5 @@
+[Desktop Entry]
+# E OS: escondido da busca de apps. O E OS usa o próprio atalho "Instalar o E OS".
+Type=Application
+Name=calamares-install-debian
+NoDisplay=true

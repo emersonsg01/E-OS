@@ -1,0 +1,15 @@
+#!/bin/sh
+# E OS: abre o instalador gráfico (Calamares) a partir da sessão live.
+# O Calamares precisa rodar como root; na sessão live o usuário tem sudo sem
+# senha. É o mesmo que o script do Debian (calamares-install-debian) faz, mas
+# para Wayland: em vez de xhost e pkexec, passa a tela do usuário para o root.
+if [ ! -d /run/live/medium ]; then
+  notify-send -a "E OS" "Instalador" "O instalador só funciona na sessão live (pen drive ou DVD)."
+  exit 1
+fi
+pgrep -x calamares >/dev/null && exit 0
+
+# Como no Debian: o /etc/fstab da sessão live sai do caminho durante a instalação.
+sudo mv /etc/fstab /etc/fstab.orig.calamares 2>/dev/null
+sudo -E env QT_QPA_PLATFORM=wayland QT_AUTO_SCREEN_SCALE_FACTOR=1 calamares
+sudo mv /etc/fstab.orig.calamares /etc/fstab 2>/dev/null

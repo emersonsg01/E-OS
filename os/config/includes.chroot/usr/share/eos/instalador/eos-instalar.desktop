@@ -1,0 +1,10 @@
+[Desktop Entry]
+# E OS: atalho do instalador gráfico. Copiado para a busca de apps só na
+# sessão live (pelo /usr/lib/eos/sessao-live).
+Type=Application
+Name=Instalar o E OS
+Comment=Instala o E OS no disco deste computador
+Exec=/usr/lib/eos/instalar
+Icon=/usr/share/eos/icones/instalar.svg
+Terminal=false
+Categories=System;

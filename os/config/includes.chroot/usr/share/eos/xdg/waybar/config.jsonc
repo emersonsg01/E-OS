@@ -101,6 +101,7 @@
     "margin-bottom": 8,
     "spacing": 0,
     "modules-center": [
+      "image#instalar",
       "image#inicio",
       "image#arquivos",
       "image#navegador",
@@ -110,6 +111,12 @@
       "wlr/taskbar"
     ],
 
+    // Só aparece na sessão live (o script não imprime nada no sistema instalado).
+    "image#instalar": {
+      "exec": "/usr/lib/eos/icone-instalar",
+      "size": 42,
+      "on-click": "/usr/lib/eos/instalar"
+    },
     "image#inicio": {
       "path": "/usr/share/eos/icones/inicio.svg",
       "size": 42,

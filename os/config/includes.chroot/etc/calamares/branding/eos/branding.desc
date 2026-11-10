@@ -1,0 +1,41 @@
+---
+# E OS: identidade do instalador gráfico (Calamares).
+# As imagens (logo.png, boas-vindas.png e slide-*.png) são geradas ou
+# copiadas pelo tools/build.sh.
+componentName:  eos
+
+welcomeStyleCalamares: true
+welcomeExpandingLogo:  true
+windowExpanding:  normal
+windowSize:       900px,640px
+windowPlacement:  center
+
+strings:
+    productName:         E OS
+    shortProductName:    E OS
+    version:             0.2
+    shortVersion:        0.2
+    versionedName:       E OS 0.2
+    shortVersionedName:  E OS 0.2
+    bootloaderEntryName: E OS
+    productUrl:          https://github.com/emersonsg01/E-OS
+    supportUrl:          https://github.com/emersonsg01/E-OS/issues
+    knownIssuesUrl:      https://github.com/emersonsg01/E-OS/issues
+    releaseNotesUrl:     https://github.com/emersonsg01/E-OS
+
+sidebar:    widget
+navigation: widget
+
+images:
+    productLogo:    "logo.png"
+    productIcon:    "logo.png"
+    productWelcome: "boas-vindas.png"
+
+slideshow:    "show.qml"
+slideshowAPI: 2
+
+style:
+    SidebarBackground:        "#111620"
+    SidebarText:              "#c9d1d9"
+    SidebarTextCurrent:       "#ffffff"
+    SidebarBackgroundCurrent: "#4f8cff"

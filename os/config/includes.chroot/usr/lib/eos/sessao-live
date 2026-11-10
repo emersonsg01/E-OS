@@ -6,3 +6,7 @@
 # Aviso na tela de login com o usuário e a senha da sessão live.
 mkdir -p /etc/issue.d
 printf 'Sessão live: usuário eos, senha live\n\n' > /etc/issue.d/50-eos-live.issue
+
+# Atalho "Instalar o E OS" na busca de apps (só na sessão live).
+mkdir -p /usr/local/share/applications
+cp /usr/share/eos/instalador/eos-instalar.desktop /usr/local/share/applications/

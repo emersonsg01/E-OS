@@ -1,0 +1,5 @@
+#!/bin/sh
+# E OS: ícone "Instalar o E OS" no dock, só na sessão live. O Waybar esconde
+# o ícone quando este script não imprime nada (sistema instalado).
+[ -d /run/live/medium ] && echo /usr/share/eos/icones/instalar.svg
+exit 0

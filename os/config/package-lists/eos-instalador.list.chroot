@@ -1,0 +1,12 @@
+# Instalador gráfico com a cara do E OS (Calamares), aberto pela sessão live.
+# O instalador do Debian continua no menu de boot como alternativa.
+calamares
+calamares-settings-debian
+# O Calamares só "recomenda" o squashfs-tools, mas precisa dele para copiar o sistema.
+squashfs-tools
+# Slides durante a instalação (Qt 6)
+qml6-module-qtquick
+qml6-module-qtquick-window
+qml6-module-qtqml-workerscript
+qml6-module-qtquick-layouts
+qml6-module-qtquick-controls

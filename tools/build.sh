@@ -48,6 +48,17 @@ fundos=config/includes.chroot/usr/share/backgrounds/eos
 mkdir -p "$fundos"
 rsvg-convert --width 1920 --height 1080 "$SRC/branding/papel-de-parede.svg" -o "$fundos/fusao.png"
 
+# Instalador gráfico (Calamares): logo, imagem de boas-vindas e slides com
+# fotos reais da interface.
+calamares=config/includes.chroot/etc/calamares/branding/eos
+mkdir -p "$calamares"
+rsvg-convert --width 256 --height 256 "$SRC/branding/logo-tesseract.svg" -o "$calamares/logo.png"
+rsvg-convert --width 800 --height 300 "$SRC/branding/instalador-boas-vindas.svg" -o "$calamares/boas-vindas.png"
+cp "$SRC/docs/img/interface-area-de-trabalho.png" "$calamares/slide-area.png"
+cp "$SRC/docs/img/interface-busca.png" "$calamares/slide-busca.png"
+cp "$SRC/docs/img/interface-painel-rapido.png" "$calamares/slide-painel.png"
+cp "$SRC/docs/img/interface-janelas.png" "$calamares/slide-janelas.png"
+
 lb config
 lb build 2>&1 | tee build.log
 

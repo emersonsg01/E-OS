@@ -10,5 +10,11 @@ swaync -c /usr/share/eos/xdg/swaync/config.json -s /usr/share/eos/xdg/swaync/sty
 nm-applet --indicator >"$log/eos-rede.log" 2>&1 &
 lxpolkit >/dev/null 2>&1 &
 
-# Boas-vindas, no estilo das notificações do Android.
-( sleep 5; notify-send -a "E OS" -i /usr/share/eos/icones/inicio.svg "Bem-vindo ao E OS 0.2" "Super + Espaço abre a busca. O painel rápido fica no canto superior direito." ) &
+# Boas-vindas, no estilo das notificações do Android. Na sessão live, explica
+# como instalar.
+if [ -d /run/live/medium ]; then
+  texto="Experimente à vontade. Para instalar no computador, clique em Instalar o E OS, o primeiro ícone do dock."
+else
+  texto="Super + Espaço abre a busca. O painel rápido fica no canto superior direito."
+fi
+( sleep 5; notify-send -a "E OS" -i /usr/share/eos/icones/inicio.svg "Bem-vindo ao E OS 0.2" "$texto" ) &
